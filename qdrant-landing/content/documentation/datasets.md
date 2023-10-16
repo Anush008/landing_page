@@ -40,9 +40,9 @@ payload with the title used to create it, along with the DOI (Digital Object Ide
     "DOI": "1612.05191"
 }
 ```
-|Models|Dimensionality|Documents|Size|Link|
-|-|-|-|-|-|
-|[InstructorXL](https://huggingface.co/hkunlp/instructor-xl)|768|2.3M|7.1 GB|[DOWNLOAD LINK](https://storage.googleapis.com/common-datasets-snapshots/arxiv_titles-3083016565637815127-2023-05-29-13-56-22.snapshot)|
+| Models                                                      | Dimensionality | Documents | Size   | Link                                                                                                                                    |
+|-------------------------------------------------------------|----------------|-----------|--------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| [InstructorXL](https://huggingface.co/hkunlp/instructor-xl) | 768            | 2.3M      | 7.1 GB | [DOWNLOAD LINK](https://storage.googleapis.com/common-datasets-snapshots/arxiv_titles-3083016565637815127-2023-05-29-13-56-22.snapshot) |
 
 
 ## Journal Article Abstracts
@@ -56,9 +56,25 @@ payload with the abstract used to create it, along with the DOI (Digital Object 
     "DOI": "1612.05191"
 }
 ```
-|Models|Dimensionality|Documents|Size|Link|
-|-|-|-|-|-|
-|[InstructorXL](https://huggingface.co/hkunlp/instructor-xl)|768|2.3M|8.4 GB|[DOWNLOAD LINK](https://storage.googleapis.com/common-datasets-snapshots/arxiv_abstracts-3083016565637815127-2023-06-02-07-26-29.snapshot)|
 
+| Models                                                      | Dimensionality | Documents | Size   | Link                                                                                                                                       |
+|-------------------------------------------------------------|----------------|-----------|--------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| [InstructorXL](https://huggingface.co/hkunlp/instructor-xl) | 768            | 2.3M      | 8.4 GB | [DOWNLOAD LINK](https://storage.googleapis.com/common-datasets-snapshots/arxiv_abstracts-3083016565637815127-2023-06-02-07-26-29.snapshot) |
 
+The embeddings generated with InstructorXL model have been generated using the following
+instruction:
 
+```
+Represent the Research Paper abstract for retrieval; Input:
+```
+
+The following code snippet shows how to generate embeddings using the InstructorXL model:
+
+```python
+from InstructorEmbedding import INSTRUCTOR
+
+model = INSTRUCTOR('hkunlp/instructor-xl')
+sentence = "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more parallelizable and requiring significantly less time to train."
+instruction = "Represent the Research Paper abstract for retrieval; Input:"
+embeddings = model.encode([[instruction,sentence]])
+```
